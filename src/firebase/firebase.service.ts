@@ -3,7 +3,6 @@ import { CreateFirebaseDto } from './dto/create-firebase.dto';
 import { UpdateFirebaseDto } from './dto/update-firebase.dto';
 import { ConfigService } from '@nestjs/config';
 import { initializeApp } from 'firebase-admin/app';
-// var admin = require("firebase-admin");
 import * as admin from 'firebase-admin'
 import { request } from 'http';
 import { config } from "dotenv";
@@ -14,10 +13,6 @@ config();
 @Injectable()
 export class FirebaseService {
   constructor(private readonly configService: ConfigService) {
-    // admin.initializeApp({
-    //   credential: admin.credential.cert(serviceAccount),
-    //   databaseURL: "https://bookstore-3d941-default-rtdb.firebaseio.com"
-    // });
   }
 
   // create(createFirebaseDto: CreateFirebaseDto) {
@@ -27,8 +22,6 @@ export class FirebaseService {
   create(token: string) {
     admin.auth().verifyIdToken(token)
   .then((userRecord) => {
-    // See the UserRecord reference doc for the contents of userRecord.
-    // console.log(`Successfully fetched user data: ${userRecord.toJSON()}`);
     console.log(userRecord)
   })
   .catch((error) => {
@@ -42,14 +35,7 @@ export class FirebaseService {
   if (verification && verification.email === email) {
     return true
   }
-  
   return false
-  // .then((userRecord) => {
-  //   console.log(userRecord)
-  // })
-  // .catch((error) => {
-  //   console.log('Error fetching user data:', error);
-  // });
   }
 
   findAll() {
@@ -60,7 +46,6 @@ export class FirebaseService {
 
     admin.auth().getUser(id)
   .then((userRecord) => {
-    // See the UserRecord reference doc for the contents of userRecord.
     console.log(`Successfully fetched user data: ${userRecord.toJSON()}`);
     console.log(userRecord)
   })
