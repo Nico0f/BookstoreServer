@@ -6,9 +6,9 @@ import { initializeApp } from 'firebase-admin/app';
 // var admin = require("firebase-admin");
 import * as admin from 'firebase-admin'
 import { request } from 'http';
+import { config } from "dotenv";
+config();
 
-
-var serviceAccount = require("../../bookstore-3d941-firebase-adminsdk-7ro90-ecc0538071.json");
 
 
 @Injectable()
