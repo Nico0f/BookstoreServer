@@ -1,0 +1,191 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["fullTextSearch"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id              Int              @id @default(autoincrement())
+  firstName       String
+  lastName        String
+  email           String           @unique
+  phone           String?
+  hashedPass      String?
+  avatar          String?
+  role            Role             @default(USER)
+  isActive        Boolean          @default(true)
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  // wishlist   Int[]
+  shoppingCart    ShoppingCart?
+  shippingAddress ShippingAddress?
+  shoppingOrder   ShoppingOrder[]
+  checkoutOrder   CheckoutOrder?
+}
+
+model CheckoutOrder {
+  id             Int    @id @default(autoincrement())
+  userName       String
+  user           User   @relation(fields: [userId], references: [id])
+  userId         Int    @unique
+  email          String
+  address        String
+  phone          String
+  shippingMethod String
+  items          Json[]
+  createdAt      BigInt
+}
+
+model ShoppingOrder {
+  id             Int            @id @default(autoincrement())
+  userName       String
+  user           User           @relation(fields: [userId], references: [id])
+  email          String
+  userId         Int
+  address        String
+  phone          String
+  orderProducts  OrderProduct[]
+  shippingMethod String
+  shippingAmount Int
+  orderAmount    Int
+  taxesAmount    Int
+  orderStatus    String
+}
+
+model OrderProduct {
+  id       Int           @id @default(autoincrement())
+  order    ShoppingOrder @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  orderId  Int
+  book     Book          @relation(fields: [bookId], references: [id], onDelete: Cascade)
+  bookId   Int
+  quantity Int
+  version  String
+}
+
+enum Role {
+  USER
+  STAFF
+  ADMIN
+}
+
+model Book {
+  id                  Int            @id @default(autoincrement())
+  title               String         @unique
+  authorName          String
+  authorId            Int?
+  publisher           String
+  publishedDate       String?
+  description         String?
+  type                String
+  pageCount           Int
+  curatedReview       String?
+  curatedReviewDate   String?
+  curatedReviewAuthor String?
+  isbn13              String
+  cover               String
+  rating              Float
+  amountRatings       Int
+  oneRating           Int
+  twoRating           Int
+  threeRating         Int
+  fourRating          Int
+  fiveRating          Int
+  priceHardcover      Float
+  pricePaperback      Float
+  priceEbook          Float
+  priceAudiobook      Float
+  bestSeller          Boolean?       @default(false)
+  ebook               Boolean?       @default(true)
+  audiobook           Boolean?       @default(true)
+  stock               Int
+  onOffer             Boolean?       @default(false)
+  onDisplay           Boolean        @default(true)
+  author              BookAuthor[]
+  CartProduct         CartProduct[]
+  OrderProduct        OrderProduct[]
+  BookGenre           BookGenre[]
+}
+
+model BookAuthor {
+  id       Int    @id @default(autoincrement())
+  book     Book   @relation(fields: [bookId], references: [id])
+  bookId   Int
+  author   Author @relation(fields: [authorId], references: [id])
+  authorId Int
+
+  @@unique([authorId, bookId])
+}
+
+model Author {
+  id    Int          @id @default(autoincrement())
+  name  String       @unique
+  about String?
+  book  BookAuthor[]
+}
+
+model BookGenre {
+  id      Int   @id @default(autoincrement())
+  book    Book  @relation(fields: [bookId], references: [id])
+  bookId  Int
+  genre   Genre @relation(fields: [genreId], references: [id])
+  genreId Int
+
+  @@unique([genreId, bookId])
+}
+
+model Genre {
+  id        Int         @id @default(autoincrement())
+  genreName String      @unique
+  BookGenre BookGenre[]
+}
+
+model ShoppingCart {
+  id           Int           @id @default(autoincrement())
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId       Int           @unique
+  cartProducts CartProduct[]
+  createdAt    DateTime      @default(now())
+}
+
+model ShippingAddress {
+  id          Int           @id @default(autoincrement())
+  user        User          @relation(fields: [userId], references: [id])
+  userId      Int           @unique
+  userAddress UserAddress[]
+  createdAt   DateTime      @default(now())
+}
+
+model UserAddress {
+  id               Int             @id @default(autoincrement())
+  shippingAdress   ShippingAddress @relation(fields: [shippingAdressId], references: [id], onDelete: Cascade)
+  shippingAdressId Int
+  address          String
+  addressNumber    String
+  details          String?
+  city             String
+  country          String
+  state            String
+  postalCode       String
+}
+
+model CartProduct {
+  id     Int          @id @default(autoincrement())
+  cart   ShoppingCart @relation(fields: [cartId], references: [id], onDelete: Cascade)
+  cartId Int
+  book   Book         @relation(fields: [bookId], references: [id], onDelete: Cascade)
+  bookId Int
+
+  @@unique([cartId, bookId])
+}
+
+model NewsletterList {
+  id    Int    @id @default(autoincrement())
+  email String @unique
+}
