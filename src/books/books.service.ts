@@ -3,13 +3,9 @@ import { Prisma } from '@prisma/client';
 import { PrismaService } from 'src/prisma.service';
 import { CreateBookDto } from './dto/create-book.dto';
 import { UpdateBookDto } from './dto/update-book.dto';
-import axios from 'axios'
 import { CustomRequest } from 'src/middleware/types';
-// import migusers from '../../users.js'
-// import migbooks from '../../books.js'
 import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
 // const { llla } = require('../../definitivo.js')
-// import llla from '../../books.js'
 
 @Injectable()
 export class BooksService {
@@ -805,106 +801,6 @@ export class BooksService {
             }
         })
 
-        // const misteryBooks = await this.prisma.bookGenre.findMany({
-        //     where: {
-        //         genre: {
-        //             genreName: 'Mystery & Crime'
-        //         },
-        //         book: {
-        //             type: 'Fiction'
-        //         }
-        //     },
-        //     orderBy: {
-        //         book: {
-        //             rating: 'desc'
-        //         }
-        //     },
-        //     select: {
-        //         book: {
-        //             select: {
-        //                 id: true,
-        //                 title: true,
-        //                 authorName: true,
-        //                 cover: true,
-        //                 rating: true,
-        //                 amountRatings: true,
-        //                 priceHardcover: true,
-        //                 pricePaperback: true,
-        //                 priceAudiobook: true,
-        //                 priceEbook: true
-        //             }
-        //         },
-        //     },
-        //     take: 4,
-        // })
-
-        // const thrillerBooks = await this.prisma.bookGenre.findMany({
-        //     where: {
-        //         genre: {
-        //             genreName: 'Thrillers'
-        //         },
-        //         book: {
-        //             type: 'Fiction'
-        //         }
-        //     },
-        //     orderBy: {
-        //         book: {
-        //             rating: 'desc'
-        //         }
-        //     },
-        //     select: {
-        //         book: {
-        //             select: {
-        //                 id: true,
-        //                 title: true,
-        //                 authorName: true,
-        //                 cover: true,
-        //                 rating: true,
-        //                 amountRatings: true,
-        //                 priceHardcover: true,
-        //                 pricePaperback: true,
-        //                 priceAudiobook: true,
-        //                 priceEbook: true
-        //             }
-        //         },
-        //     },
-        //     take: 4,
-        // })
-
-
-
-        // const horrorBooks = await this.prisma.bookGenre.findMany({
-        //     where: {
-        //         genre: {
-        //             genreName: 'Horror'
-        //         },
-        //         book: {
-        //             type: 'Fiction'
-        //         }
-        //     },
-        //     orderBy: {
-        //         book: {
-        //             rating: 'desc'
-        //         }
-        //     },
-        //     select: {
-        //         book: {
-        //             select: {
-        //                 id: true,
-        //                 title: true,
-        //                 authorName: true,
-        //                 cover: true,
-        //                 rating: true,
-        //                 amountRatings: true,
-        //                 priceHardcover: true,
-        //                 pricePaperback: true,
-        //                 priceAudiobook: true,
-        //                 priceEbook: true
-        //             }
-        //         },
-        //     },
-        //     take: 4,
-        // })
         return {
             // mainDescription: mainDescription.map(e => e.book),
             newFiction,
@@ -913,12 +809,6 @@ export class BooksService {
             newNonFiction,
             banner,
             banner2
-
-            // romanceBooks: romanceBooks.map(e => e.book),
-            // horrorBooks: horrorBooks.map(e => e.book),
-            // misteryBooks: misteryBooks.map(e => e.book),
-            // thrillerBooks: thrillerBooks.map(e => e.book),
-            // scienceFictionBooks: scienceFictionBooks.map(e => e.book)
         }
     }
 
