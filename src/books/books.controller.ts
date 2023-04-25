@@ -10,9 +10,9 @@ export class BooksController {
   constructor(private readonly booksService: BooksService) {}
   
   @Get('alls')
-  addAll() {
-    // return this.booksService.addAll()
-    return this.booksService.clean()
+  addAll(@Body() books) {
+    return this.booksService.addAll(books)
+    // return this.booksService.clean()
   }
   
   @Get('fiction')
