@@ -9,12 +9,7 @@ import { CustomRequest } from 'src/middleware/types';
 export class BooksController {
   constructor(private readonly booksService: BooksService) {}
   
-  @Get('alls')
-  addAll(@Body() books) {
-    return this.booksService.addAll(books)
-    // return this.booksService.clean()
-  }
-  
+
   @Get('fiction')
   getFictionPage() {
     return this.booksService.getFictionPage()
@@ -33,13 +28,6 @@ export class BooksController {
   @Get('newarrivals')
   newArrivalsPage() {
     return this.booksService.newArrivalsPage()
-  }
-
-
-  @Get()
-  findAll() {
-    // return this.booksService.addAll();
-    return this.booksService.findAll();
   }
 
   @Get('display')
@@ -72,12 +60,6 @@ export class BooksController {
   findOne(@Param('id') id: string) {
     return this.booksService.findOne(+id);
   }
-  
-  
-  @Post()
-  create(@Body() createBookDto: CreateBookDto) {
-    return this.booksService.create(createBookDto);
-  }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateBookDto: UpdateBookDto) {
@@ -88,10 +70,4 @@ export class BooksController {
   remove(@Param('id') id: string) {
     return this.booksService.remove(+id);
   }
-
-  @Post('clean')
-  clean() {
-    return this.booksService.clean()
-  }
-
 }

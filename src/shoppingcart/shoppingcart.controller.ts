@@ -14,16 +14,10 @@ export class ShoppingcartController {
   }
 
   @Get()
-  // findAll() {
-  //   return this.shoppingcartService.findAll();
   findAll(@Req() request: CustomRequest) {
     return this.shoppingcartService.findAll(request);
   }
 
-  // @Get(':id')
-  // findOne(@Param('id', ParseIntPipe) id: string) {
-  //   return this.shoppingcartService.findOne(+id);
-  // }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateShoppingcartDto: UpdateShoppingcartDto) {

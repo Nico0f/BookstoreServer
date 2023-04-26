@@ -43,10 +43,6 @@ export class ShoppingcartService {
     }
   }
 
-  findOne() {
-    return `This action returns all shoppingcart`;
-  }
-
   async findAll(request: CustomRequest) {
     const userId = request.user;
     const userCart = await this.prisma.shoppingCart.findUnique({

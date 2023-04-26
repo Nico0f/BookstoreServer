@@ -15,9 +15,6 @@ export class FirebaseService {
   constructor(private readonly configService: ConfigService) {
   }
 
-  // create(createFirebaseDto: CreateFirebaseDto) {
-  //   return 'This action adds a new firebase';
-  // }
 
   create(token: string) {
     admin.auth().verifyIdToken(token)
@@ -38,10 +35,6 @@ export class FirebaseService {
   return false
   }
 
-  findAll() {
-    return `This action returns all firebase`;
-  }
-
   findOne(id: string) {
 
     admin.auth().getUser(id)
@@ -53,26 +46,6 @@ export class FirebaseService {
     console.log('Error fetching user data:', error);
   });
 
-    
-    // admin.auth().verifyIdToken(id)
-    // .then((decodedToken) => {
-    //   const uid = decodedToken.uid;
-    //   console.log(decodedToken)
-    //   console.log(uid)
-    // })
-    // .catch((error) => {
-    //   console.log(error)
-    // });
-  
-
-    return `This action returns a #${id} firebase`;
   }
 
-  update(id: number, updateFirebaseDto: UpdateFirebaseDto) {
-    return `This action updates a #${id} firebase`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} firebase`;
-  }
 }

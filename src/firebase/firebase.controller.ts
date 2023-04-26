@@ -9,16 +9,9 @@ export class FirebaseController {
 
   @Post()
   create(@Req() request: any, @Body() createFirebaseDto: CreateFirebaseDto) {
-    //@ts-ignore
     const token = request.headers.token
     return this.firebaseService.create(token);
 
-    // return this.firebaseService.create(createFirebaseDto);
-  }
-
-  @Get()
-  findAll() {
-    return this.firebaseService.findAll();
   }
 
   @Get(':id')
@@ -26,13 +19,4 @@ export class FirebaseController {
     return this.firebaseService.findOne(id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateFirebaseDto: UpdateFirebaseDto) {
-    return this.firebaseService.update(+id, updateFirebaseDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.firebaseService.remove(+id);
-  }
 }

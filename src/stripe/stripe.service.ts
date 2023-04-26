@@ -1,7 +1,6 @@
 import { ForbiddenException, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { CreateStripeDto } from './dto/create-stripe.dto';
-import { UpdateStripeDto } from './dto/update-stripe.dto';
 import Stripe from 'stripe';
 import { CustomRequest } from 'src/middleware/types';
 import { PrismaService } from 'src/prisma.service';
@@ -29,7 +28,6 @@ export class StripeService {
           userId
         }
       })
-      // console.log(cartOrder)
 
       if ((Date.now() - Number(cartOrder.createdAt)) > 60000) throw new ForbiddenException('Generate new order')
 
@@ -44,7 +42,6 @@ export class StripeService {
 
 
       const paymentIntent = await this.stripe.paymentIntents.create({
-        // amount: 100,
         amount: totalAmount,
         currency: "usd",
         automatic_payment_methods: {
@@ -60,23 +57,6 @@ export class StripeService {
       }
     }
   }
-
-  findAll() {
-    return `This action returns all stripe`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} stripe`;
-  }
-
-  update(id: number, updateStripeDto: UpdateStripeDto) {
-    return `This action updates a #${id} stripe`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} stripe`;
-  }
-
 
   async amountCalculation(items: CartItem[], shippingMethod: string): Promise<totalAmount> {
     const itemsList = items.map((element: CartItem) => element.id)
@@ -160,7 +140,6 @@ export class StripeService {
           new Error('Error with shipping!')
 
     const totalAmount = totalProducts + taxes + shippingAmount
-    // return totalAmount
     return {
       totalAmount: Number((totalAmount * 100).toFixed(2)),
       displayItems,

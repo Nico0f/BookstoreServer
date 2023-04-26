@@ -29,32 +29,15 @@ export class UsersController {
       api_secret: this.configService.get<string>('CLOUDINARY_API_SECRET'),
     }); }
 
-  @Post()
-  create(@Body() createUserDto: CreateUserDto) {
-    return this.usersService.create(createUserDto);
-  }
 
-  @Get()
-  findAll() {
-    return this.usersService.findAll();
-  }
 
   @Get('current')
   findCurrent(@Req() request: CustomRequest) {
     return this.usersService.findCurrent(request);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.usersService.findOne(+id);
-  }
 
 
-  // @Patch('avatar')
-  // @UseInterceptors(FileInterceptor('image'))
-  // update(@Req() request: CustomRequest, @UploadedFile() file: Express.Multer.File, updateUserDto: UpdateUserDto) {
-  //   return this.usersService.update(request, updateUserDto);
-  // }
 
 
   
@@ -69,10 +52,6 @@ export class UsersController {
     return this.usersService.removeAvatar(request, data);
   }
   
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.usersService.remove(+id);
-  }
   
 
 }

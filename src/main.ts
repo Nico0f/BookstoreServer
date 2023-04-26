@@ -12,6 +12,8 @@ async function bootstrap() {
 
   const app = await NestFactory.create(AppModule);
   // app.enableCors({credentials: true, origin: 'http://localhost:3000'});
+  app.enableCors({credentials: true, origin: 'https://bookstore-nico0f.vercel.app'});
+
   app.use(cookieParser());
   const configService = app.get(ConfigService);
   admin.initializeApp({

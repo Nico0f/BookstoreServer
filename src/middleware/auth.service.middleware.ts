@@ -5,7 +5,6 @@ import { PrismaService } from 'src/prisma.service';
 import { ConfigService } from '@nestjs/config';
 import { JwtPayload } from 'src/auth/types';
 import { CustomRequest } from './types';
-import { initializeApp } from 'firebase-admin/app';
 import * as admin from 'firebase-admin'
 const crypto = require('crypto');
 

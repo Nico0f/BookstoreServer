@@ -16,19 +16,6 @@ export class UsersService {
     private cloudinary: CloudinaryService) { }
 
 
-  create(createUserDto: CreateUserDto) {
-    return 'This action adds a new user';
-  }
-
-  findAll() {
-    return this.prisma.user.findMany()
-    // return this.prisma.user.deleteMany()
-    // return `This action returns all users`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
-  }
 
   async findCurrent(request: CustomRequest) {
     const userId = request.user
@@ -95,10 +82,7 @@ export class UsersService {
     }
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
-  }
-  
+
   async uploadAvatar(request: CustomRequest, file: Express.Multer.File) {
     const userId = request.user
     const oldUrl = request.body.oldImage

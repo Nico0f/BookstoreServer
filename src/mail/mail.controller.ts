@@ -15,21 +15,6 @@ export class MailController {
   @Get()
   findAll() {
     return this.mailService.sendEmail('franconicoletti.14@gmail.com', 'test 2', '<p>holasss</p>')
-    // return this.mailService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.mailService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateMailDto: UpdateMailDto) {
-    return this.mailService.update(+id, updateMailDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.mailService.remove(+id);
-  }
 }

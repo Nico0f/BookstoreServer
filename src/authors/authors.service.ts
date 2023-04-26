@@ -8,14 +8,6 @@ export class AuthorsService {
   constructor(private prisma: PrismaService) { }
 
 
-  create(createAuthorDto: CreateAuthorDto) {
-    return 'This action adds a new author';
-  }
-
-  findAll() {
-    return `This action returns all authors`;
-  }
-
   async findOne(id: number) {
 
     const author = await this.prisma.bookAuthor.findFirst({
@@ -30,11 +22,4 @@ export class AuthorsService {
     return author;
   }
 
-  update(id: number, updateAuthorDto: UpdateAuthorDto) {
-    return `This action updates a #${id} author`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} author`;
-  }
 }
